@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "motion/react";
+import { ArrowDown } from "lucide-react";
 import Container from "../common/Container";
 import HeroButtons from "./HeroButtons";
 import Typewriter from "typewriter-effect";
@@ -77,6 +78,14 @@ function Hero() {
             className="mt-8"
           >
             <HeroButtons />
+
+            <a
+              href="#idea-to-impact"
+              className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-neutral-200 transition-colors hover:text-[#ffd35a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd35a]"
+            >
+              Explore the interactive Idea → Impact journey
+              <ArrowDown size={15} aria-hidden="true" className="text-[#f2a900]" />
+            </a>
           </motion.div>
         </div>
       </Container>

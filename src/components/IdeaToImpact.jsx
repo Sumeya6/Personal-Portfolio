@@ -203,10 +203,10 @@ function ThinkingSequence({ reducedMotion }) {
           <span className="mb-3 flex h-7 w-7 items-center justify-center rounded-full border border-[#f2a900]/45 bg-[#0b0905] text-[9px] text-[#ffd35a] shadow-[0_0_18px_rgba(242,169,0,0.12)] sm:mb-4 sm:h-9 sm:w-9 sm:text-[10px]">
             0{index + 1}
           </span>
-          <span className="text-[8px] font-semibold uppercase tracking-[0.12em] text-neutral-200 sm:text-[10px] sm:tracking-[0.18em]">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-neutral-200 sm:text-[11px] sm:tracking-[0.18em]">
             {step.title}
           </span>
-          <span className="mt-1 hidden max-w-28 text-[9px] leading-4 text-neutral-500 sm:block">
+          <span className="mt-1 hidden max-w-28 text-[10px] leading-4 text-neutral-400 sm:block">
             {step.detail}
           </span>
         </motion.div>
@@ -301,7 +301,7 @@ function ProjectDiscoveryPath({
               style={{ left: projectPositions[index] }}
             >
               <span
-                className={`mb-3 max-w-[105px] text-center text-[8px] font-medium leading-4 transition-colors sm:mb-4 sm:max-w-none sm:text-[10px] ${
+                className={`mb-3 max-w-[105px] text-center text-[10px] font-medium leading-4 transition-colors sm:mb-4 sm:max-w-none sm:text-[11px] ${
                   selected ? "text-[#ffd35a]" : "text-neutral-500 group-hover:text-neutral-200"
                 }`}
               >
@@ -325,7 +325,7 @@ function ProjectDiscoveryPath({
                   0{index + 1}
                 </span>
               </motion.span>
-              <span className="mt-2 text-[8px] uppercase tracking-[0.14em] text-neutral-600 sm:text-[9px]">
+              <span className="mt-2 text-[10px] uppercase tracking-[0.14em] text-neutral-500 sm:text-[11px]">
                 {selected ? "Selected" : "Explore"}
               </span>
             </button>
@@ -373,7 +373,7 @@ function IdeaToImpact() {
           <div className="mb-8 text-center md:mb-9">
             <div className="mb-3 flex items-center justify-center gap-2">
               <span className="h-px w-7 bg-[#f2a900]" />
-              <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-[#f2a900]">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#f2a900]">
                 A little about my process
               </span>
               <span className="h-px w-7 bg-[#f2a900]" />
@@ -402,7 +402,7 @@ function IdeaToImpact() {
                   className="flex flex-1 items-center gap-2"
                 >
                   <span
-                    className={`text-[9px] font-semibold tracking-[0.18em] transition-colors sm:text-[10px] ${
+                    className={`text-[10px] font-semibold tracking-[0.18em] transition-colors sm:text-[11px] ${
                         stage === index + 1
                           ? "text-[#ffd35a] [text-shadow:0_0_12px_rgba(242,169,0,0.45)]"
                           : stage > index + 1
@@ -549,44 +549,44 @@ function IdeaToImpact() {
               >
                   {stage === 3 ? (
                     <div className="mx-auto max-w-2xl">
-                      <p className="text-[9px] font-semibold tracking-[0.22em] text-[#f2a900]">
+                      <p className="text-[11px] font-semibold tracking-[0.22em] text-[#f2a900] sm:text-xs">
                         {selectedProject.title}
                       </p>
                       <dl className="mt-4 grid gap-3 text-left sm:grid-cols-2">
                         <div className="rounded-lg border border-white/[0.07] bg-black/30 p-3 sm:p-4">
-                          <dt className="text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-500">
+                          <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
                             The problem
                           </dt>
-                          <dd className="mt-1.5 text-[11px] leading-5 text-neutral-300">
+                          <dd className="mt-1.5 text-xs leading-5 text-neutral-300">
                             {selectedProjectInsight.purpose}
                           </dd>
                         </div>
                         <div className="rounded-lg border border-white/[0.07] bg-black/30 p-3 sm:p-4">
-                          <dt className="text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-500">
+                          <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
                             What I built
                           </dt>
-                          <dd className="mt-1.5 text-[11px] leading-5 text-neutral-300">
+                          <dd className="mt-1.5 text-xs leading-5 text-neutral-300">
                             {selectedProjectInsight.build}
                           </dd>
                         </div>
                         <div className="rounded-lg border border-white/[0.07] bg-black/30 p-3 sm:col-span-2 sm:p-4">
-                          <dt className="text-[9px] font-semibold uppercase tracking-[0.16em] text-neutral-500">
+                          <dt className="text-[10px] font-semibold uppercase tracking-[0.16em] text-neutral-400">
                             Development insight
                           </dt>
-                          <dd className="mt-1.5 text-[11px] leading-5 text-neutral-400">
+                          <dd className="mt-1.5 text-xs leading-5 text-neutral-400">
                             {selectedProjectInsight.insight ??
                               "A project-specific challenge or lesson isn’t documented in the portfolio data yet."}
                           </dd>
                         </div>
                       </dl>
                       <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-                        <span className="mr-1 text-[9px] uppercase tracking-[0.14em] text-neutral-500">
+                        <span className="mr-1 text-[10px] uppercase tracking-[0.14em] text-neutral-400">
                           Built with
                         </span>
                         {selectedProject.technologies.map((technology) => (
                           <span
                             key={technology}
-                            className="text-[9px] text-neutral-400 after:ml-2 after:text-[#f2a900]/50 after:content-['·'] last:after:hidden"
+                            className="text-[10px] text-neutral-300 after:ml-2 after:text-[#f2a900]/50 after:content-['·'] last:after:hidden"
                           >
                             {technology}
                           </span>
@@ -596,7 +596,7 @@ function IdeaToImpact() {
                         href={selectedProject.demo}
                         target="_blank"
                         rel="noreferrer"
-                        className="mt-3 inline-flex min-h-9 items-center gap-1.5 rounded-full border border-[#f2a900]/30 px-4 text-[10px] font-medium text-[#ffd35a] transition-colors hover:border-[#f2a900]/70 hover:bg-[#f2a900]/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd35a]"
+                        className="mt-3 inline-flex min-h-9 items-center gap-1.5 rounded-full border border-[#f2a900]/30 px-4 text-[11px] font-medium text-[#ffd35a] transition-colors hover:border-[#f2a900]/70 hover:bg-[#f2a900]/[0.06] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd35a]"
                       >
                         Open project link
                         <ArrowUpRight size={12} aria-hidden="true" />
@@ -604,13 +604,13 @@ function IdeaToImpact() {
                     </div>
                   ) : stage === 4 ? (
                     <div className="mx-auto max-w-2xl">
-                      <p className="text-[9px] font-semibold uppercase tracking-[0.24em] text-[#f2a900]">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f2a900]">
                         A little about me
                       </p>
                       <p className="mx-auto mt-2 max-w-xl text-xs leading-5 text-neutral-300 sm:text-sm sm:leading-6">
                         {currentStage.description}
                       </p>
-                      <p className="mt-5 text-[9px] font-semibold uppercase tracking-[0.24em] text-neutral-500">
+                      <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-neutral-400">
                         My developer superpower
                       </p>
                       <p className="mx-auto mt-2 max-w-xl text-lg font-medium leading-7 text-[#ffd35a] sm:text-xl">
@@ -631,13 +631,13 @@ function IdeaToImpact() {
             </div>
 
             {stage === 1 && (
-              <p className="mt-2 flex items-center justify-center gap-2 text-[10px] tracking-wide text-neutral-500">
+              <p className="mt-2 flex items-center justify-center gap-2 text-xs tracking-wide text-neutral-400">
                 <span className="h-1 w-1 rounded-full bg-[#f2a900] shadow-[0_0_8px_2px_rgba(242,169,0,0.5)]" />
                 Or click the glowing spark to begin.
               </p>
             )}
             {stage === 3 && (
-              <p className="mt-2 text-center text-[10px] tracking-wide text-neutral-500">
+              <p className="mt-2 text-center text-xs tracking-wide text-neutral-400">
                 Select a project node to explore its story.
               </p>
             )}
