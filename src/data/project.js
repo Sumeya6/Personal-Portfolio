@@ -28,18 +28,7 @@ export const projects = [
   description:
     "A web-based maintenance request management system for Arada Sub-City Administration, enabling employees to submit requests, administrators to assign technicians, and technicians to manage and resolve maintenance tasks.",
   image: civicDeskImage,
-  technologies: [
-    "React",
-    "JavaScript",
-    "Redux",
-    "Tailwind CSS",
-    "Node.js",
-    "Express.js",
-    "PostgreSQL",
-    "Prisma",
-    "REST API",
-    "i18next",
-  ],
+  technologies: ["React","JavaScript","Redux","Tailwind CSS","Node.js","Express.js","PostgreSQL","Prisma","REST API","i18next"],
   github: "https://github.com/Sumeya6/CivicDesk.git",
   demo: "https://github.com/Sumeya6/CivicDesk.git",
 },
@@ -49,6 +38,7 @@ export const projects = [
       "A modern, responsive website for the Addis Ababa City Arada Sub-city Administration.",
     image: aradaSubcity,
     technologies: ["React", "JavaScript", "Tailwind CSS", "Vite", "React Router", "Vercel"],
+    github: "https://github.com/Sumeya6/Arada-SubCity-Labor-and-Skills-office.git",
     demo: "https://arada-sub-city-labor-and-skills-off.vercel.app/",
   },
   {
@@ -57,6 +47,8 @@ export const projects = [
       "A modern, responsive website for showcasing my work and skills.",
     image: portfolioImage,
     technologies: ["React", "JavaScript", "Tailwind CSS", "Vite", "Vercel"],
+    github: "https://github.com/Sumeya6/Personal-Portfolio.git",
+    demo: "https://github.com/Sumeya6/Personal-Portfolio.git",
   },
   {
     title: "Apple Clone",
