@@ -67,28 +67,29 @@ function About() {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7 }}
-          className="mt-20"
-        >
-          <h3 className="mb-7 text-xl font-bold">Technical Skills</h3>
+        <div id="skills" className="mt-20 scroll-mt-[90px]">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7 }}
+          >
+            <h3 className="mb-7 text-xl font-bold">Technical Skills</h3>
 
-          <div className="grid grid-cols-2 gap-x-3 gap-y-5 lg:grid-cols-3 xl:grid-cols-4">
-            {skillGroups.map((group) => (
-              <div key={group.category} className="contents">
-                <h4 className="col-span-full mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500 first:mt-0">
-                  {group.category}
-                </h4>
-                {group.skills.map((skill) => (
-                  <SkillCard key={skill.name} {...skill} />
-                ))}
-              </div>
-            ))}
-          </div>
-        </motion.div>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-5 lg:grid-cols-3 xl:grid-cols-4">
+              {skillGroups.map((group) => (
+                <div key={group.category} className="contents">
+                  <h4 className="col-span-full mt-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-neutral-500 first:mt-0">
+                    {group.category}
+                  </h4>
+                  {group.skills.map((skill) => (
+                    <SkillCard key={skill.name} {...skill} />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
       </Container>
     </section>
   );

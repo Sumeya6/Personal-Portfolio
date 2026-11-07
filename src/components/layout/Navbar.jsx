@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Code2, Menu, Moon, Sun, X } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { navigation } from "../../data/navigation";
@@ -27,10 +27,39 @@ function Navbar() {
   const scrollPosition = useScrollPosition();
   const reducedMotion = useReducedMotion();
   const menuButtonRef = useRef(null);
+  const lockedOverflowRef = useRef("");
   const { theme, toggleTheme } = useTheme();
   const ThemeIcon = theme === "dark" ? Sun : Moon;
 
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = useCallback(() => {
+    document.body.style.overflow = lockedOverflowRef.current;
+    setMenuOpen(false);
+  }, []);
+
+  const handleNavClick = (event, href) => {
+    setActiveHref(href);
+
+    if (!menuOpen) {
+      return;
+    }
+
+    event?.preventDefault();
+    closeMenu();
+
+    const target = document.getElementById(href.slice(1));
+    if (target) {
+      window.requestAnimationFrame(() => {
+        target.scrollIntoView({
+          behavior: reducedMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+    }
+
+    if (window.location.hash !== href) {
+      window.history.pushState(null, "", href);
+    }
+  };
 
   useEffect(() => {
     const syncWithHash = () => {
@@ -39,6 +68,17 @@ function Navbar() {
       );
       if (currentItem) {
         setActiveHref(currentItem.href);
+        const target = document.getElementById(currentItem.href.slice(1));
+        if (target) {
+          window.requestAnimationFrame(() => {
+            if (window.location.hash === currentItem.href) {
+              target.scrollIntoView({
+                behavior: reducedMotion ? "auto" : "smooth",
+                block: "start",
+              });
+            }
+          });
+        }
       }
     };
 
@@ -52,6 +92,7 @@ function Navbar() {
     window.addEventListener("scroll", syncWithViewport, { passive: true });
     window.addEventListener("resize", syncWithViewport);
     window.addEventListener("hashchange", syncWithHash);
+    window.addEventListener("popstate", syncWithHash);
     syncWithHash();
     syncWithViewport();
 
@@ -59,8 +100,9 @@ function Navbar() {
       window.removeEventListener("scroll", syncWithViewport);
       window.removeEventListener("resize", syncWithViewport);
       window.removeEventListener("hashchange", syncWithHash);
+      window.removeEventListener("popstate", syncWithHash);
     };
-  }, []);
+  }, [reducedMotion]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -69,14 +111,40 @@ function Navbar() {
 
     const handleKeyDown = (event) => {
       if (event.key === "Escape") {
-        setMenuOpen(false);
+        closeMenu();
         menuButtonRef.current?.focus();
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen, closeMenu]);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return undefined;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    lockedOverflowRef.current = previousOverflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+    const handleDesktop = (event) => {
+      if (event.matches) {
+        closeMenu();
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleDesktop);
+    return () => mediaQuery.removeEventListener("change", handleDesktop);
+  }, [closeMenu]);
 
   return (
     <motion.header
@@ -93,6 +161,7 @@ function Navbar() {
         <a
           href="#home"
           aria-label="Go to home"
+          onClick={(event) => handleNavClick(event, "#home")}
           className="text-[#f2a900] transition-transform duration-300 hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd35a]"
         >
           <Code2 size={28} strokeWidth={1.5} />
@@ -100,11 +169,11 @@ function Navbar() {
 
         <nav aria-label="Primary navigation" className="hidden items-center gap-7 md:flex">
           {navigation.map((item, index) => (
-            <motion.a
-              key={item.href}
-              href={item.href}
-              onClick={() => setActiveHref(item.href)}
-              aria-current={activeHref === item.href ? "location" : undefined}
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(event) => handleNavClick(event, item.href)}
+                  aria-current={activeHref === item.href ? "location" : undefined}
               initial={reducedMotion ? false : { opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{
@@ -120,7 +189,7 @@ function Navbar() {
               {item.label}
               {activeHref === item.href && (
                 <motion.span
-                  layoutId="active-section-underline"
+                  layoutId="primary-active-section-underline"
                   aria-hidden="true"
                   initial={false}
                   transition={{
@@ -177,11 +246,12 @@ function Navbar() {
           </button>
           <button
             ref={menuButtonRef}
+            type="button"
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd35a] md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-white transition-colors hover:text-[#ffd35a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd35a] md:hidden"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
-            aria-controls={menuOpen ? "mobile-navigation" : undefined}
+            aria-controls="mobile-navigation"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -197,7 +267,7 @@ function Navbar() {
             transition={{ duration: reducedMotion ? 0 : 0.25 }}
             aria-hidden={!menuOpen}
             inert={!menuOpen}
-            className="border-t border-white/5 bg-black/95 backdrop-blur-xl md:hidden"
+            className="max-h-[calc(100dvh-72px)] overflow-y-auto overscroll-contain border-t border-white/5 bg-black/95 backdrop-blur-xl md:hidden"
           >
             <nav
               id="mobile-navigation"
@@ -208,10 +278,7 @@ function Navbar() {
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  onClick={() => {
-                    setActiveHref(item.href);
-                    closeMenu();
-                  }}
+              onClick={(event) => handleNavClick(event, item.href)}
                   aria-current={activeHref === item.href ? "location" : undefined}
                   className={`relative border-b py-4 text-sm transition-colors hover:text-[#ffd35a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd35a] ${
                     activeHref === item.href
@@ -222,7 +289,7 @@ function Navbar() {
                   {item.label}
                   {activeHref === item.href && (
                     <motion.span
-                      layoutId="active-section-underline"
+                      layoutId="mobile-active-section-underline"
                       aria-hidden="true"
                       initial={false}
                       transition={{
@@ -237,7 +304,7 @@ function Navbar() {
 
               <Button
                 href="#contact"
-                onClick={closeMenu}
+                onClick={(event) => handleNavClick(event, "#contact")}
                 className="mt-4 w-full"
               >
                 Contact Me
