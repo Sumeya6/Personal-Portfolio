@@ -4,7 +4,7 @@ function HeroButtons() {
   return (
     <div className="flex flex-wrap gap-3">
       <Button href="#about" showArrow>
-        <span className="font-semibold text-white">About me</span>
+        <span className="font-semibold">About me</span>
       </Button>
 
       <Button href="#projects" variant="secondary">

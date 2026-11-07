@@ -210,7 +210,7 @@ function ContactForm() {
           whileTap={reducedMotion ? undefined : { scale: 0.98 }}
           type="submit"
           disabled={loading}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#f2a900] py-3 text-xs transition-colors hover:bg-[#ffc107] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd35a] disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#f2a900] py-3 text-xs text-black transition-colors hover:bg-[#ffc107] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd35a] disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span>{loading ? "Sending..." : "Send Message"}</span>
           {!loading && <ArrowRight size={16} aria-hidden="true" />}
