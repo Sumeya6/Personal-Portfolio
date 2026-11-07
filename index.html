@@ -2,9 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>personal-portfolio</title>
+
+    <title>Sumeya Bahiru | Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Sumeya Bahiru — Electrical and Computer Engineering student and full-stack developer building practical, scalable web applications. Explore her projects, skills, and interactive Idea-to-Impact journey."
+    />
+    <meta name="author" content="Sumeya Bahiru" />
+    <meta name="theme-color" content="#030000" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sumeya Bahiru" />
+    <meta property="og:title" content="Sumeya Bahiru | Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Electrical and Computer Engineering student and full-stack developer. Explore my projects, skills, and interactive Idea-to-Impact journey."
+    />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sumeya Bahiru | Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Electrical and Computer Engineering student and full-stack developer. Explore my projects, skills, and interactive Idea-to-Impact journey."
+    />
+
+    <script>
+      try {
+        var savedTheme = localStorage.getItem("portfolio-theme");
+        var initialTheme = savedTheme === "light" ? "light" : "dark";
+        document.documentElement.dataset.theme = initialTheme;
+        var themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (themeColorMeta) {
+          themeColorMeta.content = initialTheme === "light" ? "#FAF8F4" : "#030000";
+        }
+      } catch (error) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -5,9 +5,19 @@ const transitionDuration = 260;
 
 function ThemeProvider({ children }) {
   const transitionTimeoutRef = useRef(null);
-  const [theme, setTheme] = useState(() =>
-    document.documentElement.dataset.theme === "light" ? "light" : "dark",
-  );
+  const [theme, setTheme] = useState(() => {
+    if (document.documentElement.dataset.theme === "light") {
+      return "light";
+    }
+
+    try {
+      return window.localStorage.getItem("portfolio-theme") === "light"
+        ? "light"
+        : "dark";
+    } catch {
+      return "dark";
+    }
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
